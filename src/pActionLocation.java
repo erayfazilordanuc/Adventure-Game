@@ -74,6 +74,8 @@ public abstract class pActionLocation extends pLocation{
 
     public void combat(cObstacle o){
 
+        boolean state = true;
+
         System.out.println("\nYour health : " + player.getHealth());
 
         System.out.println("\nYour opponents health : " + o.getHealth() + "\n");
@@ -81,9 +83,13 @@ public abstract class pActionLocation extends pLocation{
         if(this.random<5){ // Başlayan kişiyi belirleme
 
             System.out.println(o.getName() + " went on the attack");
-            while(true){
+            while(state == true){
 
-                long i = percentRandomNumber();
+                System.out.print("\nMake your choice :\n1-Hit\n2-Run away\nYour choice : ");
+                Scanner in = new Scanner(System.in);
+                int c = in.nextInt();
+                switch(c){
+                case 1 : long i = percentRandomNumber();
                 boolean oRate = false;
                 if(i<=o.getCriticalRate()){
                     oRate = true;
@@ -107,6 +113,8 @@ public abstract class pActionLocation extends pLocation{
                 System.out.println("\n" + o.getName() + " hit " + o.getDamage());
                     }
                 System.out.println("\n" + player.getName() + " has " + player.getHealth() + " health left");
+                }break;
+                case 2 : state = false; break;
                 }
 
                 long u = percentRandomNumber2();
@@ -169,7 +177,11 @@ public abstract class pActionLocation extends pLocation{
                     }
                 System.out.println("\n" + o.getName() + " has " + o.getHealth() + " health left");
                 }
-
+                System.out.print("\nMake your choice :\n1-Hit\n2-Run away\nYour choice : ");
+                Scanner in = new Scanner(System.in);
+                int c = in.nextInt();
+                switch(c){
+                case 1 :    
                 long i = percentRandomNumber4();
                 boolean oRate = false;
                 if(i<=o.getCriticalRate()){
@@ -194,8 +206,9 @@ public abstract class pActionLocation extends pLocation{
                 System.out.println("\n" + o.getName() + " hit " + o.getDamage());
                     }
                 System.out.println("\n" + player.getName() + " has " + player.getHealth() + " health left");
-                }
-                
+                }break;
+                case 2 : state = false; break;
+            }
             }
 
         }
